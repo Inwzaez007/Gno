@@ -11,39 +11,38 @@ on:
 
 jobs:
   flutter_job:
-
     # The machine, we can also use windows-latest or ubuntu-latest
     # We are choosing macos-latest because we will be also building for iOS
     runs-on: macos-latest
 
     steps:
-
       # Clones the project on the machine
       - uses: actions/checkout@v4
 
       # Verifies if the dart code is formatted well
-    - name: Verify formatting
-      run: dart format --output=none --set-exit-if-changed .
-      # --set-exit-if-changed stops execution if the any code is not well formatted
-      # --output=none prints files which needs to be formatted
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+        # --set-exit-if-changed stops execution if the any code is not well formatted
+        # --output=none prints files which needs to be formatted
 
-    # Checks for Symantic errors. Can be configured using analysis_options.yaml
-    - name: Analyze project source
-      run: flutter analyze --fatal-warnings
-      # --fatal-warnings stops execution if any warnings are found
-      # Checks for Symantic errors. Can be configured using analysis_options.yaml
-    - name: Run tests
-      run: flutter test
+      # Checks for Semantic errors. Can be configured using analysis_options.yaml
+      - name: Analyze project source
+        run: flutter analyze --fatal-warnings
+        # --fatal-warnings stops execution if any warnings are found
 
-      # Create android apk
-- name: Build apk
-  run: flutter build apk
+      # Runs tests
+      - name: Run tests
+        run: flutter test
 
-  # Upload apk to Firebase distribution
-- name: Upload apk to Firebase distribution
-  uses: wzieba/Firebase-Distribution-Github-Action@v1.7.0
-  with:
-    appId: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
-    serviceCredentialsFileContent: ${{ secrets.FIREBASE_TOKEN }}
-    groups: all_testers
-    file: build/app/outputs/flutter-apk/app-release.apk
+      # Create Android APK
+      - name: Build apk
+        run: flutter build apk
+
+      # Upload APK to Firebase distribution
+      - name: Upload apk to Firebase distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.7.0
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
+          serviceCredentialsFileContent: ${{ secrets.FIREBASE_TOKEN }}
+          groups: all_testers
+          file: build/app/outputs/flutter-apk/app-release.apk
