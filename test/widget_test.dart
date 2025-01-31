@@ -13,7 +13,7 @@ void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
-       MaterialApp(
+       const MaterialApp(
         home: MyApp(), // หรือใช้ const ถ้า widget ของคุณเป็น const ได้
       ),
     );

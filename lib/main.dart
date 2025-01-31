@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,6 +17,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// ignore: use_key_in_widget_constructors
 class HomePage extends StatelessWidget {
   final List<Map<String, String>> menuList = [
     {
@@ -78,7 +81,7 @@ class HomePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
                   'แนะนำอาหาร',
@@ -137,7 +140,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
                   'แนะนำของว่าง',
@@ -229,14 +232,14 @@ class CustomContainer extends StatelessWidget {
   final List<Map<String, String>> menuList; // Receiving menuList
 
   const CustomContainer({
-    Key? key,
+    super.key,
     required this.name,
     required this.color,
     required this.imagePath,
     required this.description,
     required this.youtubeUrl,
     required this.menuList, // Receiving menuList
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -317,15 +320,16 @@ class DetailPage extends StatefulWidget {
   final List<Map<String, String>> menuList; // Receiving menuList
 
   const DetailPage({
-    Key? key,
+    super.key,
     required this.name,
     required this.imagePath,
     required this.description,
     required this.youtubeUrl,
     required this.menuList, // Receiving menuList
-  }) : super(key: key);
+  });
 
   @override
+  // ignore: library_private_types_in_public_api
   _DetailPageState createState() => _DetailPageState();
 }
 
