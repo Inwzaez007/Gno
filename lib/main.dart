@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 
 // ignore: use_key_in_widget_constructors
 class HomePage extends StatelessWidget {
-  final List<Map<String, String>> menuList = [
+  final List<Map<String, String>> menu = [
     {
       'name': 'กระเพราหมูกรอบ',
       'imagePath':
